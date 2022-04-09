@@ -10,20 +10,23 @@ import javax.mail.Session;
 import javax.mail.Transport;
 
 /**
- * JAVA MAILER | 2022
- * @author https://www.javatpoint.com/example-of-sending-email-using-java-mail-api-through-gmail-server
+ * JAVA MAILER
+ * @development_date 04/2022
+ * @author João Duarte | https://www.linkedin.com/in/jo%C3%A3o-duarte-453bb9199
+ * @author - [Email Protocol] - https://www.javatpoint.com/example-of-sending-email-using-java-mail-api-through-gmail-server
  */
 public class Main {
     private static boolean keepRunning = true;
     private static final Scanner keyboard = new Scanner(System.in);
     private static String fromEmail = "", fromPassword = "";
-    /*Use Instruction:
+
+    /*Use Instructions:
         A) How to Include Jar files in IntellIJ:
             1. Open your installed IntelliJ IDEA Project and.
             2. Go to the File > Project Structure.
             3. Select Modules at the left panel and select the Dependencies tab.
             4. Select the + icon and select 1 JARs or Directories option.
-            5. select your JAR file or you can select the directories.
+            5. select your JAR file, or, you can select the directories.
             6. Click on the OK button.
           B) Jar Files Needed:
             1. javax.mail.jar
