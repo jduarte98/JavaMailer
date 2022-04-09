@@ -1,6 +1,9 @@
 package joaoduarte.samples.javaMailer;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
+import java.util.Scanner;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.mail.Session;
@@ -11,6 +14,9 @@ import javax.mail.Transport;
  * @author https://www.javatpoint.com/example-of-sending-email-using-java-mail-api-through-gmail-server
  */
 public class Main {
+    private static boolean keepRunning = true;
+    private static final Scanner keyboard = new Scanner(System.in);
+    private static String fromEmail = "", fromPassword = "";
     /*Use Instruction:
         A) How to Include Jar files in IntellIJ:
             1. Open your installed IntelliJ IDEA Project and.
@@ -29,9 +35,37 @@ public class Main {
      * @param args  --null--
      */
     public static void main(String[] args) {
-        System.out.println("### JAVA MAILER ###\n");
-        send("from@email.com","fromEmail_password","to@email.com","email_subject","email_body");
-        System.out.println("__ BYE __");
+        appBanner();
+        System.out.println("\n    Login:");
+        fromEmail = readString(keyboard,"   Email: ");
+        fromPassword = readString(keyboard, "   Password: ");
+        String control = "";
+        System.out.println("    Email:");
+        while(keepRunning){
+            send(fromEmail,fromPassword,readString(keyboard, "      To: "),readString(keyboard,"      Email Subject: "),readString(keyboard,"      Email Body: "));
+            control = readString(keyboard, "    Send Another Email? (Y/N) ");
+            if(control.equalsIgnoreCase("n") || control.equalsIgnoreCase("no")){
+                keepRunning = false;
+            }else{
+                keepRunning = true;
+            }
+        }
+        System.out.println("### Logged Out, Process Finished! ###");
+    }
+
+    /**
+     * Displays the application banner and Runtime Warnings!
+     */
+    private static final void appBanner(){
+        System.out.println("### JAVA MAILER | " + new SimpleDateFormat("yyyy").format(new Date()) + " ###\n");
+        System.out.println("    |---------------------------------------------------------------------------------------------------------------------------|");
+        System.out.println("    |   Warning:                                                                                                                |");
+        System.out.println("    |---------------------------------------------------------------------------------------------------------------------------|");
+        System.out.println("    |     - This program is configured to use Gmail as the Email server;                                                        |");
+        System.out.println("    |     - Be aware that your password is/may be exposed on screen!                                                            |");
+        System.out.println("    |     - For the Email protocol to work, you must have \"External Apps Access\" enabled in your google Account Control Panel;  |");
+        System.out.println("    |---------------------------------------------------------------------------------------------------------------------------|");
+
     }
 
     /**
@@ -59,7 +93,6 @@ public class Main {
                         return new PasswordAuthentication(from,password);
                     }
                 });
-
         //Compose Message
         try {
             MimeMessage message = new MimeMessage(session);
@@ -67,16 +100,26 @@ public class Main {
             message.setSubject(sub);
             message.setText(msg);
             //Send Message
-            System.out.println("Sending Message ...");
+            System.out.println("    Sending Message ...");
             Transport.send(message);
-            System.out.println("Message Sent Successfully!");
+            System.out.println("    Message Sent Successfully!");
         } catch (MessagingException e) {
-            System.out.println("Error Sending the Message!\nHere's what Happened:\n");
+            System.out.println(" !!! Error Sending the Message !!!\nHere's what Happened:\n");
             e.printStackTrace();
         }
 
     }
 
+    /**
+     * Read User Keyboard Inputed Strings
+     * @param aKeyboard Scanner Object
+     * @param aMsg Message to Show when "requesting" the data
+     * @return String - User Keyboard provided data
+     */
+    public static String readString(Scanner aKeyboard, String aMsg) {
+        System.out.print("  " + aMsg);
+        return aKeyboard.nextLine();
+    }
 
 }
 
