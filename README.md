@@ -1,11 +1,11 @@
 # JavaMailer
 
-This is a sample program that focus on Email sending through an extrenal [Java](https://www.java.com/en/) application.
+This is a sample program that focus on Email sending through an external [Java](https://www.java.com/en/) application.
 
 ## Needed Dependencies
 For the program to work, it needs two main Java Libraries:
-* javax.mail (Download [here](https://jar-download.com/?search_box=javax.mail));
-* javax.activation (Download [here](https://jar-download.com/?search_box=javax.activation));
+* javax.mail ([download here](https://jar-download.com/?search_box=javax.mail));
+* javax.activation ([download here](https://jar-download.com/?search_box=javax.activation));
 
 ## Email Server
 This program is configured to use public Google SMTP settings:
